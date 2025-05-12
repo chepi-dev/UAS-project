@@ -1,0 +1,18 @@
+/* Pastikan body dan html mengambil tinggi penuh */
+body,
+html {
+  height: 100%; /* Mengatur tinggi 100% untuk body dan html */
+  margin: 0; /* Menghilangkan margin default */
+  display: flex;
+  flex-direction: column; /* Menata elemen di dalam body secara vertikal */
+}
+
+/* Wrapper utama agar mengambil ruang tersisa */
+.wrapper {
+  flex: 1; /* Agar .wrapper mengambil sisa ruang di halaman */
+}
+
+/* Footer akan selalu berada di bawah */
+footer {
+  margin-top: auto; /* Footer akan selalu berada di bawah konten */
+}

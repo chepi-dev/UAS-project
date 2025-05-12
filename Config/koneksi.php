@@ -4,8 +4,8 @@ $user = 'root';
 $pass = '';
 $database = 'ekskul';
 
-$db = mysqli_connect($localhost, $user, $pass, $database);
+$conn = mysqli_connect($localhost, $user, $pass, $database);
 
-if (!$db) {
+if (!$conn) {
     die("Koneksi database gagal : " . mysqli_connect_error());
 }
