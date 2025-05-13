@@ -44,7 +44,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link" href="peserta.php">Daftar Peserta</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="logout.php">Logout</a>
+                            <a class="nav-link" href="../auth/login.php">Logout</a>
                         </li>
                     </ul>
                 </div>

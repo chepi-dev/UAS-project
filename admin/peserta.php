@@ -1,5 +1,5 @@
 <?php
-// require_once '../../auth/auth.php';
+require_once '../auth/session.php';
 require_once '../config/koneksi.php';
 include 'partials/header-admin.php';
 ?>
