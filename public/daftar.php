@@ -6,22 +6,45 @@ $ekskul = mysqli_query($conn, "SELECT * FROM kegiatan");
 ?>
 
 <head>
-    <link rel="stylesheet" href="../assets/public-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<h2>Formulir Pendaftaran Ekstrakurikuler</h2>
-<form action="proses_daftar.php" method="post">
-    Nama Siswa: <input type="text" name="nama_lengkap" required><br>
-    Kelas: <input type="text" name="kelas" required><br>
-    No HP: <input type="text" name="no_hp" required><br>
-    Pilih Ekskul:
-    <select name="id_kegiatan" required>
-        <option value="">--Pilih--</option>
-        <?php while ($row = mysqli_fetch_assoc($ekskul)) { ?>
-            <option value="<?= $row['id']; ?>"><?= $row['nama_kegiatan']; ?></option>
-        <?php } ?>
-    </select><br>
-    <button type="submit">Daftar</button>
-</form>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg rounded-4">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Formulir Pendaftaran Ekstrakurikuler</h3>
+                    <form action="proses_daftar.php" method="post">
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Siswa</label>
+                            <input type="text" name="nama" class="form-control" id="nama" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kelas" class="form-label">Kelas</label>
+                            <input type="text" name="kelas" class="form-control" id="kelas" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="no_hp" class="form-label">No HP</label>
+                            <input type="text" name="no_hp" class="form-control" id="no_hp" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="id_kegiatan" class="form-label">Pilih Ekskul</label>
+                            <select name="id_kegiatan" class="form-select" id="id_kegiatan" required>
+                                <option value="">-- Pilih Ekstrakurikuler --</option>
+                                <?php while ($row = mysqli_fetch_assoc($ekskul)) { ?>
+                                    <option value="<?= $row['id']; ?>"><?= $row['nama_kegiatan']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include '../includes/footer.php'; ?>

@@ -24,12 +24,12 @@ include 'partials/header-admin.php';
                     $no = 1;
                     while ($row = mysqli_fetch_assoc($result)) :
                     ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= htmlspecialchars($row['nama']) ?></td>
-                        <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
-                        <td><?= htmlspecialchars($row['no_hp']) ?></td>
-                    </tr>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= htmlspecialchars($row['nama']) ?></td>
+                            <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
+                            <td><?= htmlspecialchars($row['no_hp']) ?></td>
+                        </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>

@@ -8,7 +8,7 @@ include 'partials/header-admin.php';
     <div class="content container mt-5">
         <div class="container mt-4">
             <h2>Tambah Kegiatan Ekstrakurikuler</h2>
-            <form action="proses/proses_kegiatan_add.php" method="POST">
+            <form action="controllers/proses_kegiatan_add.php" method="POST">
                 <div class="mb-3">
                     <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
                     <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" required>

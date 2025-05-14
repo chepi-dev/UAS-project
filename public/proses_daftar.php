@@ -1,32 +1,26 @@
 <?php
 include '../config/koneksi.php';
 
-$nama = $_POST['nama_lengkap'];
+// Ambil data dari form
+$nama = $_POST['nama'];
 $kelas = $_POST['kelas'];
 $no_hp = $_POST['no_hp'];
 $ekskul_id = $_POST['id_kegiatan'];
-$tanggal_daftar = date('Y-m-d');
 
-$query = "INSERT INTO pendaftar (nama_lengkap, kelas, no_hp, id_kegiatan, tanggal_daftar)
-          VALUES ('$nama', '$kelas', '$no_hp', $ekskul_id, '$tanggal_daftar')";
-
-if (mysqli_query($conn, $query)) {
-    echo "Pendaftaran berhasil! <a href='index.php'>Kembali</a>";
-} else {
-    echo "Error: " . mysqli_error($conn);
+// Validasi input sederhana (opsional tapi disarankan)
+if (empty($nama) || empty($kelas) || empty($no_hp) || empty($ekskul_id)) {
+    echo "Semua data harus diisi! <a href='daftar.php'>Kembali</a>";
+    exit;
 }
 
-?>
+// Query insert (tanpa tanggal_daftar karena sudah default CURRENT_TIMESTAMP)
+$query = "INSERT INTO pendaftar (nama, kelas, no_hp, id_kegiatan)
+          VALUES ('$nama', '$kelas', '$no_hp', $ekskul_id)";
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../assets/public-style.css">
-</head>
-<body>
-    
-</body>
-</html>
+// Eksekusi query
+if (mysqli_query($conn, $query)) {
+    echo "✅ Pendaftaran berhasil! <a href='index.php'>Kembali</a>";
+} else {
+    echo "❌ Terjadi kesalahan: " . mysqli_error($conn);
+    echo "<br>Query: " . $query; // Debug opsional
+}

@@ -1,24 +1,18 @@
 <?php
-// require_once '../../auth/auth.php';
 require_once '../../config/koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'];
     $nama = htmlspecialchars($_POST['nama_kegiatan']);
     $deskripsi = htmlspecialchars($_POST['deskripsi']);
     $jadwal = htmlspecialchars($_POST['jadwal']);
 
-    $query = "UPDATE kegiatan SET 
-                nama_kegiatan = '$nama',
-                deskripsi = '$deskripsi',
-                jadwal = '$jadwal'
-              WHERE id = $id";
+    $query = "INSERT INTO kegiatan (nama_kegiatan, deskripsi, jadwal) VALUES ('$nama', '$deskripsi', '$jadwal')";
 
     if (mysqli_query($conn, $query)) {
-        header("Location: ../dashboard.php?status=updated");
+        header("Location: ../dashboard.php?status=sukses");
         exit;
     } else {
-        echo "Gagal mengupdate data: " . mysqli_error($conn);
+        echo "Gagal menyimpan data: " . mysqli_error($conn);
     }
 } else {
     echo "Akses tidak diizinkan.";

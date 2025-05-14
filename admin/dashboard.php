@@ -29,19 +29,19 @@ include 'partials/header-admin.php';
 
                     while ($row = mysqli_fetch_assoc($result)) :
                     ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
-                        <td><?= htmlspecialchars($row['deskripsi']) ?></td>
-                        <td><?= htmlspecialchars($row['jadwal']) ?></td>
-                        <td>
-                            <a href="kegiatan_edit.php?id=<?= $row['id'] ?> " class="btn btn-outline-warning">Edit</a>
-                            <a href="proses/proses_kegiatan_delete.php?id=<?= $row['id'] ?>"
-                                onclick="return confirm('Yakin ingin menghapus kegiatan ini?')"
-                                class="btn btn-outline-danger btn-sm">Delete</a>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
+                            <td><?= htmlspecialchars($row['deskripsi']) ?></td>
+                            <td><?= htmlspecialchars($row['jadwal']) ?></td>
+                            <td>
+                                <a href="kegiatan_edit.php?id=<?= $row['id'] ?> " class="btn btn-outline-warning">Edit</a>
+                                <a href="controllers/proses_kegiatan_delete.php?id=<?= $row['id'] ?>"
+                                    onclick="return confirm('Yakin ingin menghapus kegiatan ini?')"
+                                    class="btn btn-outline-danger btn-sm">Delete</a>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>

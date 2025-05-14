@@ -17,7 +17,7 @@ if (!$data) {
     <div class="content container mt-5">
         <div class="container mt-5">
             <h2>Edit Kegiatan</h2>
-            <form action="proses/proses_kegiatan_edit.php" method="POST">
+            <form action="controllers/proses_kegiatan_edit.php" method="POST">
                 <input type="hidden" name="id" value="<?= $data['id'] ?>">
                 <div class="mb-4">
                     <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
