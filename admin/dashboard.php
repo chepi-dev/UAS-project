@@ -4,6 +4,7 @@
 require_once '../auth/session.php';
 require_once '../config/koneksi.php';
 include 'partials/header-admin.php';
+
 ?>
 <link rel="stylesheet" href="../assets/css/admin-style.css">
 
@@ -28,23 +29,33 @@ include 'partials/header-admin.php';
                     $result = mysqli_query($conn, $query);
 
                     while ($row = mysqli_fetch_assoc($result)) :
-                    ?>
-                        <tr>
-                            <td><?= $no++ ?></td>
-                            <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
-                            <td><?= htmlspecialchars($row['deskripsi']) ?></td>
-                            <td><?= htmlspecialchars($row['jadwal']) ?></td>
-                            <td>
-                                <a href="kegiatan_edit.php?id=<?= $row['id'] ?> " class="btn btn-outline-warning">Edit</a>
-                                <a href="controllers/proses_kegiatan_delete.php?id=<?= $row['id'] ?>"
-                                    onclick="return confirm('Yakin ingin menghapus kegiatan ini?')"
-                                    class="btn btn-outline-danger btn-sm">Delete</a>
+                        // Format jadwal
+                        $timestamp = strtotime($row['jadwal']);
+                        $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-                            </td>
-                        </tr>
+                        $hariNama = $hari[date('w', $timestamp)];
+                        $jam = date('H:i', $timestamp);
+                        $tanggal = date('j', $timestamp);
+                        $bulanNama = $bulan[date('n', $timestamp) - 1];
+                        $jadwalFormatted = "$hariNama, $jam, $tanggal $bulanNama";
+                    ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
+                        <td><?= htmlspecialchars($row['deskripsi']) ?></td>
+                        <td><?= $jadwalFormatted ?></td>
+                        <td>
+                            <a href="kegiatan_edit.php?id=<?= $row['id'] ?>" class="btn btn-outline-warning">Edit</a>
+                            <a href="controllers/proses_kegiatan_delete.php?id=<?= $row['id'] ?>"
+                                onclick="return confirm('Yakin ingin menghapus kegiatan ini?')"
+                                class="btn btn-outline-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>

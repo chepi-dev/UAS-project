@@ -18,6 +18,7 @@ $query = mysqli_query($conn, "SELECT * FROM kegiatan");
                 <tr>
                     <th>No</th>
                     <th>Nama Kegiatan</th>
+                    <th>Gambar</th>
                     <th>Deskripsi</th>
                     <th>Jadwal</th>
                 </tr>
@@ -27,12 +28,13 @@ $query = mysqli_query($conn, "SELECT * FROM kegiatan");
                 $no = 1;
                 while ($row = mysqli_fetch_assoc($query)) {
                 ?>
-                    <tr>
-                        <td class="text-center"><?= $no++; ?></td>
-                        <td><?= htmlspecialchars($row['nama_kegiatan']); ?></td>
-                        <td><?= htmlspecialchars($row['deskripsi']); ?></td>
-                        <td><?= htmlspecialchars($row['jadwal']); ?></td>
-                    </tr>
+                <tr>
+                    <td class="text-center"><?= $no++; ?></td>
+                    <td><?= htmlspecialchars($row['nama_kegiatan']); ?></td>
+                    <td><?= htmlspecialchars($row['deskripsi']); ?></td>
+                    <td><?= htmlspecialchars($row['deskripsi']); ?></td>
+                    <td><?= htmlspecialchars($row['jadwal']); ?></td>
+                </tr>
                 <?php } ?>
             </tbody>
         </table>
