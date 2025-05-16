@@ -1,18 +1,11 @@
 <?php
 // footer.php - File yang berisi footer website ekstrakurikuler
 
+include '../config/koneksi.php';
+
 $site_name = "EkskulKita";
 $school_name = "SMA Teladan Nusantara";
 $copyright_year = date("Y");
-
-$ekskul_categories = [
-    "Olahraga" => "kategori.php?cat=olahraga",
-    "Seni" => "kategori.php?cat=seni",
-    "Akademik" => "kategori.php?cat=akademik",
-    "Teknologi" => "kategori.php?cat=teknologi",
-    "Bahasa" => "kategori.php?cat=bahasa",
-    "Keagamaan" => "kategori.php?cat=keagamaan"
-];
 
 $popular_ekskul = [
     "Basket" => "detail.php?id=1",
@@ -36,23 +29,6 @@ $social_media = [
     "youtube" => "https://youtube.com/ekskulkita"
 ];
 
-// Newsletter
-$newsletter_submit = false;
-$email = "";
-$email_error = "";
-
-if (isset($_POST['subscribe'])) {
-    $newsletter_submit = true;
-    $email = $_POST['email'];
-
-    if (empty($email)) {
-        $email_error = "Email tidak boleh kosong";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $email_error = "Format email tidak valid";
-    } else {
-        // Simpan ke database (implementasi sesuai kebutuhan)
-    }
-}
 ?>
 
 <!-- FOOTER -->
@@ -74,48 +50,26 @@ if (isset($_POST['subscribe'])) {
                 </div>
             </div>
 
-            <!-- Kategori Ekskul -->
-            <div class="col-md-2 mb-4">
-                <h6>Kategori Ekskul</h6>
-                <ul class="list-unstyled">
-                    <?php foreach ($ekskul_categories as $category => $url): ?>
-                    <li><a href="<?= $url; ?>" class="text-white-50 text-decoration-none"><?= $category; ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-
             <!-- Ekskul Populer -->
             <div class="col-md-2 mb-4">
                 <h6>Ekskul Populer</h6>
                 <ul class="list-unstyled">
-                    <?php foreach ($popular_ekskul as $ekskul => $url): ?>
-                    <li><a href="<?= $url; ?>" class="text-white-50 text-decoration-none"><?= $ekskul; ?></a></li>
-                    <?php endforeach; ?>
+                    <li><a href="daftar.php?ekskul=<?= urlencode($row['nama_kegiatan']) ?>" class="text-white-50 text-decoration-none">Futsal</a></li>
+                    <li><a href="daftar.php?id=1" class="text-white-50 text-decoration-none">Basket</a></li>
+                    <li><a href="detail.php?id=22" class="text-white-50 text-decoration-none">Badminton</a></li>
+                    <li><a href="detail.php?id=23" class="text-white-50 text-decoration-none">Musik</a></li>
+                    <li><a href="detail.php?id=24" class="text-white-50 text-decoration-none">Esport Mobile Legend</a></li>
                 </ul>
             </div>
 
-            <!-- Kontak + Newsletter -->
-            <div class="col-md-4 mb-4">
+            <!-- Kontak -->
+            <div class="col-md-6 mb-4">
                 <h6>Kontak Kami</h6>
                 <ul class="list-unstyled text-white-50 small">
                     <?php foreach ($contact_info as $label => $value): ?>
                     <li><strong><?= $label; ?>:</strong> <?= $value; ?></li>
                     <?php endforeach; ?>
                 </ul>
-
-                <form method="post" class="mt-3">
-                    <label for="email" class="form-label">Berlangganan Newsletter</label>
-                    <div class="input-group mb-2">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email Anda"
-                            value="<?= htmlspecialchars($email); ?>">
-                        <button class="btn btn-primary" type="submit" name="subscribe">Langganan</button>
-                    </div>
-                    <?php if ($newsletter_submit && empty($email_error)): ?>
-                    <div class="text-success small">Terima kasih telah berlangganan!</div>
-                    <?php elseif (!empty($email_error)): ?>
-                    <div class="text-danger small"><?= $email_error; ?></div>
-                    <?php endif; ?>
-                </form>
             </div>
         </div>
 
