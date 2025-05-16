@@ -1,12 +1,10 @@
 <?php
 // footer.php - File yang berisi footer website ekstrakurikuler
 
-// Variabel untuk pengaturan dinamis
 $site_name = "EkskulKita";
-$copyright_year = date("Y");
 $school_name = "SMA Teladan Nusantara";
+$copyright_year = date("Y");
 
-// Daftar kategori ekstrakurikuler
 $ekskul_categories = [
     "Olahraga" => "kategori.php?cat=olahraga",
     "Seni" => "kategori.php?cat=seni",
@@ -16,7 +14,6 @@ $ekskul_categories = [
     "Keagamaan" => "kategori.php?cat=keagamaan"
 ];
 
-// Daftar ekskul populer
 $popular_ekskul = [
     "Basket" => "detail.php?id=1",
     "Paduan Suara" => "detail.php?id=5",
@@ -25,7 +22,6 @@ $popular_ekskul = [
     "English Club" => "detail.php?id=15"
 ];
 
-// Informasi kontak
 $contact_info = [
     "Alamat" => "Jl. Pendidikan No. 123, Jakarta Selatan",
     "Telepon" => "(021) 1234-5678",
@@ -33,96 +29,106 @@ $contact_info = [
     "Jam Operasional" => "Senin - Jumat: 08.00 - 16.00 WIB"
 ];
 
-// Media sosial
 $social_media = [
-    "F" => "https://facebook.com/ekskulkita",
-    "T" => "https://twitter.com/ekskulkita",
-    "I" => "https://instagram.com/ekskulkita",
-    "Y" => "https://youtube.com/ekskulkita"
+    "facebook" => "https://facebook.com/ekskulkita",
+    "twitter" => "https://twitter.com/ekskulkita",
+    "instagram" => "https://instagram.com/ekskulkita",
+    "youtube" => "https://youtube.com/ekskulkita"
 ];
+
+// Newsletter
+$newsletter_submit = false;
+$email = "";
+$email_error = "";
+
+if (isset($_POST['subscribe'])) {
+    $newsletter_submit = true;
+    $email = $_POST['email'];
+
+    if (empty($email)) {
+        $email_error = "Email tidak boleh kosong";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $email_error = "Format email tidak valid";
+    } else {
+        // Simpan ke database (implementasi sesuai kebutuhan)
+    }
+}
 ?>
 
 <!-- FOOTER -->
-<footer>
-    <div class="footer-container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Tentang <?php echo $site_name; ?></h3>
-                <p><?php echo $site_name; ?> adalah platform yang menyediakan informasi lengkap tentang kegiatan ekstrakurikuler di <?php echo $school_name; ?>. Kami berkomitmen untuk membantu siswa mengembangkan bakat dan potensi mereka di luar kegiatan akademik.</p>
-                <div class="social-icons">
-                    <?php foreach($social_media as $icon => $url): ?>
-                        <a href="<?php echo $url; ?>" target="_blank"><?php echo $icon; ?></a>
+<footer class="bg-dark text-white pt-5 mt-5" id="kontak">
+    <div class="container">
+        <div class="row">
+
+            <!-- Tentang -->
+            <div class="col-md-4 mb-4">
+                <h5>Tentang <?= $site_name; ?></h5>
+                <p><?= $site_name; ?> adalah platform kegiatan ekstrakurikuler di <?= $school_name; ?> untuk membantu
+                    siswa mengembangkan potensi.</p>
+                <div class="d-flex gap-2">
+                    <?php foreach ($social_media as $icon => $url): ?>
+                    <a href="<?= $url; ?>" target="_blank" class="text-white fs-4">
+                        <i class="bi bi-<?= $icon; ?>"></i>
+                    </a>
                     <?php endforeach; ?>
                 </div>
             </div>
-            
-            <div class="footer-section">
-                <h3>Kategori Ekskul</h3>
-                <ul>
-                    <?php foreach($ekskul_categories as $category => $url): ?>
-                        <li><a href="<?php echo $url; ?>"><?php echo $category; ?></a></li>
+
+            <!-- Kategori Ekskul -->
+            <div class="col-md-2 mb-4">
+                <h6>Kategori Ekskul</h6>
+                <ul class="list-unstyled">
+                    <?php foreach ($ekskul_categories as $category => $url): ?>
+                    <li><a href="<?= $url; ?>" class="text-white-50 text-decoration-none"><?= $category; ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
-            
-            <div class="footer-section">
-                <h3>Ekskul Populer</h3>
-                <ul>
-                    <?php foreach($popular_ekskul as $ekskul => $url): ?>
-                        <li><a href="<?php echo $url; ?>"><?php echo $ekskul; ?></a></li>
+
+            <!-- Ekskul Populer -->
+            <div class="col-md-2 mb-4">
+                <h6>Ekskul Populer</h6>
+                <ul class="list-unstyled">
+                    <?php foreach ($popular_ekskul as $ekskul => $url): ?>
+                    <li><a href="<?= $url; ?>" class="text-white-50 text-decoration-none"><?= $ekskul; ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
-            
-            <div class="footer-section">
-                <h3>Kontak Kami</h3>
-                <?php foreach($contact_info as $label => $value): ?>
-                    <div class="contact-info">
-                        <strong><?php echo $label; ?>:</strong> <?php echo $value; ?>
+
+            <!-- Kontak + Newsletter -->
+            <div class="col-md-4 mb-4">
+                <h6>Kontak Kami</h6>
+                <ul class="list-unstyled text-white-50 small">
+                    <?php foreach ($contact_info as $label => $value): ?>
+                    <li><strong><?= $label; ?>:</strong> <?= $value; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+
+                <form method="post" class="mt-3">
+                    <label for="email" class="form-label">Berlangganan Newsletter</label>
+                    <div class="input-group mb-2">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email Anda"
+                            value="<?= htmlspecialchars($email); ?>">
+                        <button class="btn btn-primary" type="submit" name="subscribe">Langganan</button>
                     </div>
-                <?php endforeach; ?>
-                
-                <?php
-                // Form berlangganan newsletter
-                $newsletter_submit = false;
-                $email = "";
-                $email_error = "";
-                
-                if(isset($_POST['subscribe'])) {
-                    $newsletter_submit = true;
-                    $email = $_POST['email'];
-                    
-                    if(empty($email)) {
-                        $email_error = "Email tidak boleh kosong";
-                    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        $email_error = "Format email tidak valid";
-                    } else {
-                        // Kode untuk menyimpan email ke database
-                        // ...
-                    }
-                }
-                ?>
-                
-                <form action="" method="post" class="newsletter-form">
-                    <h4>Berlangganan Newsletter</h4>
-                    <?php if($newsletter_submit && empty($email_error)): ?>
-                        <p style="color: #4aca9f;">Terima kasih telah berlangganan!</p>
-                    <?php else: ?>
-                        <input type="email" name="email" placeholder="Alamat Email Anda" value="<?php echo $email; ?>">
-                        <?php if(!empty($email_error)): ?>
-                            <p style="color: #ff6b6b;"><?php echo $email_error; ?></p>
-                        <?php endif; ?>
-                        <button type="submit" name="subscribe">Langganan</button>
+                    <?php if ($newsletter_submit && empty($email_error)): ?>
+                    <div class="text-success small">Terima kasih telah berlangganan!</div>
+                    <?php elseif (!empty($email_error)): ?>
+                    <div class="text-danger small"><?= $email_error; ?></div>
                     <?php endif; ?>
                 </form>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; <?php echo $copyright_year; ?> <?php echo $site_name; ?>. Hak Cipta Dilindungi. | Dibuat dengan <span style="color: #ff6b6b;">&hearts;</span> di <?php echo $school_name; ?></p>
+
+        <!-- Footer Bottom -->
+        <div class="border-top border-light mt-4 pt-3 text-center small text-white-50">
+            &copy; <?= $copyright_year; ?> <?= $site_name; ?>. Dibuat dengan <span class="text-danger">&hearts;</span>
+            di <?= $school_name; ?>.
         </div>
     </div>
 </footer>
 
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

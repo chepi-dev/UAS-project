@@ -17,9 +17,10 @@ include 'partials/header-admin.php';
                     <tr>
                         <th>No</th>
                         <th>Nama Kegiatan</th>
+                        <th>Gambar</th> <!-- Kolom gambar -->
                         <th>Deskripsi</th>
                         <th>Jadwal</th>
-                        <th>Aksi</th> <!-- Tambahan kolom Aksi -->
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +30,6 @@ include 'partials/header-admin.php';
                     $result = mysqli_query($conn, $query);
 
                     while ($row = mysqli_fetch_assoc($result)) :
-                        // Format jadwal
                         $timestamp = strtotime($row['jadwal']);
                         $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
                         $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
@@ -43,6 +43,15 @@ include 'partials/header-admin.php';
                     <tr>
                         <td><?= $no++ ?></td>
                         <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
+                        <td>
+                            <?php if (!empty($row['gambar'])): ?>
+                            <img src="../uploads/<?= htmlspecialchars($row['gambar']) ?>"
+                                alt="<?= htmlspecialchars($row['nama_kegiatan']) ?>"
+                                style="max-width:100px; height:auto;">
+                            <?php else: ?>
+                            <span>Tidak ada gambar</span>
+                            <?php endif; ?>
+                        </td>
                         <td><?= htmlspecialchars($row['deskripsi']) ?></td>
                         <td><?= $jadwalFormatted ?></td>
                         <td>

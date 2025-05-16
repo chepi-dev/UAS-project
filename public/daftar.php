@@ -32,11 +32,17 @@ $ekskul = mysqli_query($conn, "SELECT * FROM kegiatan");
                             <label for="id_kegiatan" class="form-label">Pilih Ekskul</label>
                             <select name="id_kegiatan" class="form-select" id="id_kegiatan" required>
                                 <option value="">-- Pilih Ekstrakurikuler --</option>
-                                <?php while ($row = mysqli_fetch_assoc($ekskul)) { ?>
-                                    <option value="<?= $row['id']; ?>"><?= $row['nama_kegiatan']; ?></option>
+                                <?php
+                                $ekskul_terpilih = isset($_GET['ekskul']) ? $_GET['ekskul'] : '';
+                                while ($row = mysqli_fetch_assoc($ekskul)) {
+                                    $selected = ($ekskul_terpilih == $row['nama_kegiatan']) ? 'selected' : '';
+                                ?>
+                                <option value="<?= $row['id']; ?>" <?= $selected; ?>><?= $row['nama_kegiatan']; ?>
+                                </option>
                                 <?php } ?>
                             </select>
                         </div>
+
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
                         </div>

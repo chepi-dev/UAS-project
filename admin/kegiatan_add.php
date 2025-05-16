@@ -8,15 +8,22 @@ include 'partials/header-admin.php';
     <div class="content container mt-5">
         <div class="container mt-4">
             <h2>Tambah Kegiatan Ekstrakurikuler</h2>
-            <form action="controllers/proses_kegiatan_add.php" method="POST">
+            <form action="controllers/proses_kegiatan_add.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
                     <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" required>
                 </div>
+
+                <div class="mb-3">
+                    <label for="gambar" class="form-label">Gambar Kegiatan</label>
+                    <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
+                </div>
+
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
                     <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" required></textarea>
                 </div>
+
                 <div class="mb-3">
                     <label for="jadwal" class="form-label">Jadwal</label>
                     <input type="datetime-local" class="form-control" id="jadwal" name="jadwal" required>
@@ -26,6 +33,7 @@ include 'partials/header-admin.php';
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <a href="dashboard.php" class="btn btn-secondary">Kembali</a>
             </form>
+
         </div>
     </div>
 </div>
