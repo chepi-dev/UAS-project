@@ -7,13 +7,6 @@ $site_name = "EkskulKita";
 $school_name = "SMA Teladan Nusantara";
 $copyright_year = date("Y");
 
-$popular_ekskul = [
-    "Basket" => "detail.php?id=1",
-    "Paduan Suara" => "detail.php?id=5",
-    "Robotik" => "detail.php?id=12",
-    "Fotografi" => "detail.php?id=8",
-    "English Club" => "detail.php?id=15"
-];
 
 $contact_info = [
     "Alamat" => "Jl. Pendidikan No. 123, Jakarta Selatan",
@@ -54,11 +47,14 @@ $social_media = [
             <div class="col-md-2 mb-4">
                 <h6>Ekskul Populer</h6>
                 <ul class="list-unstyled">
-                    <li><a href="daftar.php?ekskul=<?= urlencode($row['nama_kegiatan']) ?>" class="text-white-50 text-decoration-none">Futsal</a></li>
-                    <li><a href="daftar.php?id=1" class="text-white-50 text-decoration-none">Basket</a></li>
-                    <li><a href="detail.php?id=22" class="text-white-50 text-decoration-none">Badminton</a></li>
-                    <li><a href="detail.php?id=23" class="text-white-50 text-decoration-none">Musik</a></li>
-                    <li><a href="detail.php?id=24" class="text-white-50 text-decoration-none">Esport Mobile Legend</a></li>
+                    <li><a href="daftar.php?ekskul=Futsal" class="text-white-50 text-decoration-none">Futsal</a></li>
+                    <li><a href="daftar.php?ekskul=Basket" class="text-white-50 text-decoration-none">Basket</a></li>
+                    <li><a href="daftar.php?ekskul=Badminton" class="text-white-50 text-decoration-none">Badminton</a>
+                    </li>
+                    <li><a href="daftar.php?ekskul=Musik" class="text-white-50 text-decoration-none">Musik</a></li>
+                    <li><a href="daftar.php?ekskul=Esport Mobile Legend"
+                            class="text-white-50 text-decoration-none">Esport Mobile Legend</a></li>
+
                 </ul>
             </div>
 

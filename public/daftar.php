@@ -29,15 +29,26 @@ $ekskul = mysqli_query($conn, "SELECT * FROM kegiatan");
                             <input type="text" name="no_hp" class="form-control" id="no_hp" required>
                         </div>
                         <div class="mb-4">
+                            <?php
+                            // Ambil ekskul dari parameter jika ada
+                            $ekskul_terpilih = isset($_GET['ekskul']) ? urldecode($_GET['ekskul']) : '';
+                            ?>
+                            <!-- Menampilkan notifikasi jika ada ekskul yang dipilih -->
+                            <?php if ($ekskul_terpilih): ?>
+                            <div class="alert alert-info">
+                                Anda sedang mendaftar untuk ekstrakurikuler:
+                                <strong><?= htmlspecialchars($ekskul_terpilih); ?></strong>
+                            </div>
+                            <?php endif; ?>
+                            <!-- Form Dropdown Ekskul -->
                             <label for="id_kegiatan" class="form-label">Pilih Ekskul</label>
                             <select name="id_kegiatan" class="form-select" id="id_kegiatan" required>
                                 <option value="">-- Pilih Ekstrakurikuler --</option>
-                                <?php
-                                $ekskul_terpilih = isset($_GET['ekskul']) ? $_GET['ekskul'] : '';
-                                while ($row = mysqli_fetch_assoc($ekskul)) {
+                                <?php while ($row = mysqli_fetch_assoc($ekskul)) {
                                     $selected = ($ekskul_terpilih == $row['nama_kegiatan']) ? 'selected' : '';
                                 ?>
-                                <option value="<?= $row['id']; ?>" <?= $selected; ?>><?= $row['nama_kegiatan']; ?>
+                                <option value="<?= $row['id']; ?>" <?= $selected; ?>>
+                                    <?= htmlspecialchars($row['nama_kegiatan']); ?>
                                 </option>
                                 <?php } ?>
                             </select>
