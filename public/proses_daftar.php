@@ -35,31 +35,31 @@ $nama_ekskul = $data_ekskul ? $data_ekskul['nama_kegiatan'] : 'Tidak Diketahui';
                         <h4 class="card-title mb-4">Hasil Pendaftaran</h4>
 
                         <?php if (!$valid): ?>
-                        <div class="alert alert-danger">
-                            ❌ Semua data harus diisi! <a href="daftar.php" class="alert-link">Kembali ke Form</a>.
-                        </div>
+                            <div class="alert alert-danger">
+                                ❌ Semua data harus diisi! <a href="daftar.php" class="alert-link">Kembali ke Form</a>.
+                            </div>
                         <?php else: ?>
-                        <?php
+                            <?php
                             $query = "INSERT INTO pendaftar (nama, kelas, no_hp, id_kegiatan)
                                       VALUES ('$nama', '$kelas', '$no_hp', $ekskul_id)";
                             if (mysqli_query($conn, $query)): ?>
-                        <div class="alert alert-success">
-                            ✅ <strong>Pendaftaran Berhasil!</strong> Berikut data yang kamu daftarkan:
-                        </div>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item"><strong>Nama:</strong> <?= htmlspecialchars($nama); ?></li>
-                            <li class="list-group-item"><strong>Kelas:</strong> <?= htmlspecialchars($kelas); ?></li>
-                            <li class="list-group-item"><strong>No HP:</strong> <?= htmlspecialchars($no_hp); ?></li>
-                            <li class="list-group-item"><strong>Ekstrakurikuler:</strong>
-                                <?= htmlspecialchars($nama_ekskul); ?></li>
-                        </ul>
-                        <a href="index.php" class="btn btn-primary">Kembali ke Beranda</a>
-                        <?php else: ?>
-                        <div class="alert alert-danger">
-                            ❌ Terjadi kesalahan saat menyimpan data: <?= mysqli_error($conn); ?>
-                        </div>
-                        <a href="daftar.php" class="btn btn-secondary">Kembali ke Form</a>
-                        <?php endif; ?>
+                                <div class="alert alert-success">
+                                    ✅ <strong>Pendaftaran Berhasil!</strong> Berikut data yang kamu daftarkan:
+                                </div>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item"><strong>Nama:</strong> <?= htmlspecialchars($nama); ?></li>
+                                    <li class="list-group-item"><strong>Kelas:</strong> <?= htmlspecialchars($kelas); ?></li>
+                                    <li class="list-group-item"><strong>No HP:</strong> <?= htmlspecialchars($no_hp); ?></li>
+                                    <li class="list-group-item"><strong>Ekstrakurikuler:</strong>
+                                        <?= htmlspecialchars($nama_ekskul); ?></li>
+                                </ul>
+                                <a href="index.php" class="btn btn-primary">Kembali ke Beranda</a>
+                            <?php else: ?>
+                                <div class="alert alert-danger">
+                                    ❌ Terjadi kesalahan saat menyimpan data: <?= mysqli_error($conn); ?>
+                                </div>
+                                <a href="daftar.php" class="btn btn-secondary">Kembali ke Form</a>
+                            <?php endif; ?>
                         <?php endif; ?>
 
                     </div>
